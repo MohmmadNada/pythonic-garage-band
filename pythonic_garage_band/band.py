@@ -2,20 +2,24 @@ from abc import abstractmethod
 
 class Band():
     all_bands=[]
-    all_members=[]
+    members=[]
     def __init__(self,name,members) :
-        self.name=name
-        self.members=members
+        self.name=name#string
+        self.members=members#list
+        Band.members.append(self)
         Band.all_bands.append(self)
+    @classmethod
+    def members_list(cls):
+        return cls.members 
 
 
-class Musician ():
+class Musician():
     '''
     base class
     '''
-    member=[] #all instance
     def __init__(self,name) :
         self.name=name
+        Band.members.append(self)
     @abstractmethod
     def __str__(self) :
         pass
@@ -26,10 +30,9 @@ class Musician ():
     def get_instrument(self) :
         pass
 
-class Guitarist (Musician):
+class Guitarist(Musician):
     def __init__(self,name):
         self.name=name
-        Guitarist.member.append(self)
     def __str__(self):
         return f"My name is {self.name} and I play guitar"
     def __repr__(self):
@@ -58,5 +61,13 @@ class Bassist (Musician):
         return "bass"
 
 if __name__ == '__main__':
-    Drummer("Ginger Baker")
-    
+    test5=Band('member',['0'])
+    test4=Musician('s')
+    '''
+    goooooooooooo
+    '''
+    # tes1=Musician(Guitarist('ahmad'))
+    test=Guitarist('ahmad')
+    # print(Band.members)
+    print(Band.members_list())
+
