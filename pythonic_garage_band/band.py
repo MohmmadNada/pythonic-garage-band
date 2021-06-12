@@ -1,59 +1,73 @@
 from abc import abstractmethod
-'''
-Use Python classes to model a Band made up of different kinds of musicians.
 
-Start with Guitarist,Bassist, and Drummer.
-
-Make use of a Musician base class to handle common functionality which particular kinds of musicians will inherit.
-'''
-class Band :
-    '''
-    A Band instance should have a name attribute which is a string.
-    A Band instance should have a members attribute which is a list of instances that inherit from Musician base (or super) class.
-    A Band instance should have a play_solos method that asks each member musician to play a solo, in the order they were added to band.
-    A Band instance should have appropriate __str__ and __repr__ methods.
-    A Band should have a class method to_list which returns a list of previously created Band instances
-
-    '''
-    allmembers=[]
-    def __init__(self,name,members):
-        self.name=name
-        self.members=members#attribute which is a list of instances that inherit from Musician base (or super) class.
-        Band.allmembers.append(self)
-        return print(f'hello')
-    def __str__(self):
-        pass
-    def __repr__(self):
-        pass
-    def play_solos():
-        pass
+class Band():
+    all_bands=[]
+    members=[]
+    def __init__(self,name,members) :
+        self.name=name#string
+        self.members=members#list
+        Band.members.append(self)
+        Band.all_bands.append(self)
     @classmethod
-    def to_list (cls):
-         return Band.allmembers
-    
-class Musician:
+    def members_list(cls):
+        return cls.members 
+
+
+class Musician():
     '''
-    Each kind of Musician instance should have appropriate __str__ and __repr__ methods.
-    Each kind of Musician instance should have a get_instrument method that returns string.
-    Each kind of Musician instance should have a play_solo method that returns string.
+    base class
     '''
-    def __init__(self) :
+    def __init__(self,name) :
+        self.name=name
+        Band.members.append(self)
+    @abstractmethod
+    def __str__(self) :
         pass
-    def __str__(self):
+    @abstractmethod
+    def __repr__(self) :
         pass
-    def __repr__(self):
-        pass
-    def get_instrument():
-        return "string"
-    def play_solo():
+    @abstractmethod
+    def get_instrument(self) :
         pass
 
 class Guitarist(Musician):
-    pass
-    # return "My name is Joan Jett and I play guitar"
-class Bassist(Musician):
-    pass
-class Drummer(Musician):
-    pass
+    def __init__(self,name):
+        self.name=name
+    def __str__(self):
+        return f"My name is {self.name} and I play guitar"
+    def __repr__(self):
+        return f'Guitarist instance. Name = {self.name}'
+    def get_instrument(self):
+        return "guitar"
+
+class Drummer (Musician):
+    def __init__(self,name):
+        self.name=name
+    def __str__(self):
+        return f'My name is {self.name} and I play drums'
+    def __repr__(self):
+        return f'Drummer instance. Name = {self.name}'
+    def get_instrument(self):
+        return "drums"
+        
+class Bassist (Musician):
+    def __init__(self,name):
+        self.name=name
+    def __str__(self):
+        return f'My name is {self.name} and I play bass'
+    def __repr__(self):
+        return f'Bassist instance. Name = {self.name}'
+    def get_instrument(self):
+        return "bass"
+
 if __name__ == '__main__':
-    
+    test5=Band('member',['0'])
+    test4=Musician('s')
+    '''
+    goooooooooooo
+    '''
+    # tes1=Musician(Guitarist('ahmad'))
+    test=Guitarist('ahmad')
+    # print(Band.members)
+    print(Band.members_list())
+
